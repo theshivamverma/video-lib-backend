@@ -60,7 +60,7 @@ router
     res.status(200).json({ success: true, playlist });
   })
 
-router.route("/:playlistId/addvideo")
+router.route("/:playlistId/add-video")
 .post(async (req, res) => {
     try{
         const { videoId } = req.body;
@@ -75,7 +75,7 @@ router.route("/:playlistId/addvideo")
     }
 })
 
-router.route("/:playlistId/removevideo").post(async (req, res) => {
+router.route("/:playlistId/remove-video").post(async (req, res) => {
   try {
     const { videoId } = req.body;
     const { playlist } = req;

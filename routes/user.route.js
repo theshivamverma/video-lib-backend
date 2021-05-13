@@ -128,4 +128,35 @@ router.route("/:userId/remove-from-myplaylist").post(async (req, res) => {
   }
 });
 
+router.route("/:userId/add-new-playlist")
+.post(async (req, res) => {
+  try {
+    const { user } = req
+    const { playlistId } = req.body
+    user.playlists.push(playlistId)
+    const savedUser = await user.save()
+    res.status(200).json({ success: true, savedUser })
+  } catch (error) {
+    res.status(400).json({ success: false, message: "error adding playlist", errorMessage: error.message })
+  }
+})
+
+router.route("/:userId/remove-playlist").post(async (req, res) => {
+  try {
+    const { user } = req;
+    const { playlistId } = req.body;
+    user.playlists.pull(playlistId);
+    const savedUser = await user.save();
+    res.status(200).json({ success: true, savedUser });
+  } catch (error) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "error removing playlist",
+        errorMessage: error.message,
+      });
+  }
+});
+
 module.exports = router;
