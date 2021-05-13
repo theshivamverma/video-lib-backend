@@ -3,9 +3,10 @@ const mongoose = require("mongoose")
 async function initializeDBConnection(){
     try{
         const res = await mongoose.connect(process.env.DB_URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true
-        })
+          useUnifiedTopology: true,
+          useNewUrlParser: true,
+          autoIndex: true,
+        });
         if(res){
             console.log("DB Connected")
         }
