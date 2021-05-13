@@ -17,12 +17,14 @@ initializeDBConnection()
 const userRouter  = require("./routes/user.route")
 const playlistRouter = require("./routes/playlist.route");
 const videoRouter = require("./routes/videos.route");
+const authRouter = require("./routes/auth.route")
 const { errorHandler } = require("./middlewares/errorHandler.middleware")
 const { routeNotFound } = require("./middlewares/routeNotFound.middleware")
 
 app.use("/api/user", userRouter)
 app.use("/api/video", videoRouter)
 app.use("/api/playlist", playlistRouter)
+app.use("/api/auth", authRouter)
 
 app.get("/", (req, res) => {
     res.send("Hello world")
