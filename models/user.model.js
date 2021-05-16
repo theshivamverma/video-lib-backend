@@ -21,7 +21,6 @@ const UserSchema = new Schema({
     },
     playlists: [{ type: Schema.Types.ObjectId, ref: "Playlist" }],
     watchlater: [String],
-    myplaylist: [String]
 })
 
 const User = mongoose.model("User", UserSchema)

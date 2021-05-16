@@ -1,6 +1,5 @@
 const express = require("express");
 const { User } = require("../models/user.model");
-const { route } = require("./playlist.route");
 
 const router = express.Router();
 
@@ -91,38 +90,6 @@ router.route("/:userId/remove-from-watch-later").post(async (req, res) => {
     res.status(400).json({
       success: false,
       message: "error removing from watch later",
-      errorMessage: error.message,
-    });
-  }
-});
-
-router.route("/:userId/add-to-myplaylist").post(async (req, res) => {
-  try {
-    const { user } = req;
-    const { videoId } = req.body;
-    user.myplaylist.push(videoId);
-    const savedUser = await user.save();
-    res.status(200).json({ success: true, savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error adding to my playlist",
-      errorMessage: error.message,
-    });
-  }
-});
-
-router.route("/:userId/remove-from-myplaylist").post(async (req, res) => {
-  try {
-    const { user } = req;
-    const { videoId } = req.body;
-    user.myplaylist.pull(videoId);
-    const savedUser = await user.save();
-    res.status(200).json({ success: true, savedUser });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "error removing from my playlist",
       errorMessage: error.message,
     });
   }
