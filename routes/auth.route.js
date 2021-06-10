@@ -1,23 +1,19 @@
-const express = require("express")
-const { User } = require("../models/user.model")
+const express = require("express");
+const router = express.Router();
 
-const router = express.Router()
+const {
+  loginUser,
+  signupUser,
+  checkUsernameValidity,
+  checkEmailValidity,
+} = require("../controllers/auth.controller");
 
-router.route("/")
-.post(async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const user = await User.find({ username });
-        if (user[0].password === password) {
-          res.status(200).json({ success: true, message: "Authorized user", user });
-        } else {
-          res
-            .status(403)
-            .json({ success: false, message: "Unauthorized user" });
-        }
-    } catch (error) {
-         res.status(403).json({ success: false, message: "Unauthorized user" });
-    }
-})
+router.post("/login", loginUser);
 
-module.exports = router
+router.post("/username-check", checkUsernameValidity);
+
+router.post("/email-check", checkEmailValidity);
+
+router.post("/signup", signupUser);
+
+module.exports = router;
